@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spin Wheel App</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="player-count-container" class="text-center">
+            <!-- Center the container -->
+            <p id="player-count" class="text-2xl mb-4">Number of Players: Loading...</p>
+            <!-- Display player count here and make it bigger -->
+        </div>
+        <div class="container">
+            <canvas id="wheel"></canvas>
+            <button id="spin-btn">Spin</button>
+            <img src="img/Red-Left-Arrow-PNG-File.png" alt="spinner arrow" />
+        </div>
+        <div id="final-value">
+            <p>Click On The Spin Button To Start<br>You have 03 attempts to win. <br>Good Luck 😊</p>
+        </div>
+        <button id="next-btn" style="display: none;">Redeem</button> <!-- Add the "Next" button -->
+    </div>
+    <!-- Chart JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- Chart JS Plugin for displaying text over chart -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
+    <!-- Script -->
+    <script src="game.js"></script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDlq4ji3ZEpmg66ZzGpxUfo1yi3YgraqFU",
+            authDomain: "adsparo-game.firebaseapp.com",
+            projectId: "adsparo-game",
+            storageBucket: "adsparo-game.appspot.com",
+            messagingSenderId: "920736398837",
+            appId: "1:920736398837:web:ffae08c670be89ff5574bc",
+            measurementId: "G-LDQW499Q8H"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        // Get a Firestore instance
+        const firestore = getFirestore(app);
+
+        // Reference to the players collection in Firestore
+        const playersCollection = collection(firestore, "registrations");
+
+        // Function to update the player count
+        async function updatePlayerCount() {
+            const querySnapshot = await getDocs(playersCollection);
+            const playerCount = querySnapshot.size; // Get the number of documents in the collection
+            const playerCountElement = document.getElementById("player-count");
+
+            if (playerCountElement) {
+                playerCountElement.textContent = `Number of Players: ${playerCount}`;
+            }
+        }
+
+        // Call the updatePlayerCount function to initially display the count
+        updatePlayerCount();
+    </script>
+</body>
+
+</html>

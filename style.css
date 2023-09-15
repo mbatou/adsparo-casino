@@ -1,0 +1,155 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #fac782, #fc809b);
+}
+
+.wrapper {
+    width: 90%;
+    max-width: 34.37em;
+    max-height: 90vh;
+    background-color: #ffffff;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    padding: 3em;
+    border-radius: 1em;
+    box-shadow: 0 4em 5em rgba(27, 8, 53, 0.2);
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#wheel {
+    max-height: inherit;
+    width: inherit;
+    top: 0;
+    padding: 0;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#spin-btn {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    height: 26%;
+    width: 26%;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 0;
+    background: radial-gradient(#fdcf3b 50%, #d88a40 85%);
+    color: #c66e16;
+    text-transform: uppercase;
+    font-size: 1.8em;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+img {
+    position: absolute;
+    width: 4em;
+    top: 45%;
+    right: -8%;
+}
+
+#final-value {
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 1.5em;
+    color: #202020;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        font-size: 12px;
+    }
+
+    img {
+        right: -5%;
+    }
+}
+
+
+.btn {
+    background-color: #fc809b;
+    color: #1c2969;
+    font-weight: 700;
+}
+
+.btn:hover {
+    background-color: #1c2969;
+    color: #fc809b;
+    font-weight: 700;
+}
+
+.headline-form {
+    color: #1c2969;
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.description-form {
+    color: #1c2969;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+/* Style for the "Next" button */
+#next-btn {
+    background-color: #fc809b;
+    /* Green background color */
+    border: none;
+    /* Remove border */
+    color: white;
+    /* Text color */
+    padding: 10px 20px;
+    /* Padding around the text */
+    font-size: 26px;
+    /* Font size */
+    cursor: pointer;
+    /* Cursor style on hover */
+    border-radius: 5px;
+    /* Rounded corners */
+    transition: background-color 0.3s;
+    /* Smooth background color transition on hover */
+    margin-top: 20px;
+    /* Add some space between the button and other elements */
+    /* Center the button horizontally and vertically */
+    position: relative;
+    left: 50%;
+    margin-top: 60px;
+    transform: translate(-50%, -50%);
+
+}
+
+/* Style the button on hover */
+#next-btn:hover {
+    background-color: #1c2969;
+    /* Darker green color on hover */
+}
+
+.heading-adsparo {
+    margin-bottom: 40px;
+    color: #1c2969;
+    position: relative;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+}

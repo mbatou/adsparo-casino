@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adsparo | Spin Game</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center">
+    <div class="text-center mb-6">
+        <!-- Add the heading above the form -->
+        <h1 class="text-2xl font-semibold headline-form">Welcome on Adsparo Arcade</h1>
+        <p class="text-sm text-gray-700 description-form">We're thrilled to have you here to enjoy one of our games.</p>
+    </div>
+    <div class="flex flex-col items-center bg-white p-8 rounded-lg shadow-lg w-96 form bg-opacity-50">
+        <form id="registrationForm" class="w-full">
+            <!-- Username Input -->
+            <div class="mb-4 w-full">
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" placeholder="Abena" name="username" id="username" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <!-- Email Input -->
+            <div class="mb-4 w-full">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" placeholder="abena@xyz.com" name="email" id="email" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <!-- Country Input -->
+            <div class="mb-6 w-full">
+                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                <input type="text" placeholder="Ghana" name="country" id="country" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <!-- Registration Button -->
+            <div class="w-full">
+                <button type="submit" class="w-full text-white py-2 px-4 rounded-md btn">Register</button>
+            </div>
+        </form>
+    </div>
+    <script src="main.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDlq4ji3ZEpmg66ZzGpxUfo1yi3YgraqFU",
+            authDomain: "adsparo-game.firebaseapp.com",
+            projectId: "adsparo-game",
+            storageBucket: "adsparo-game.appspot.com",
+            messagingSenderId: "920736398837",
+            appId: "1:920736398837:web:ffae08c670be89ff5574bc",
+            measurementId: "G-LDQW499Q8H"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+
+        const database = getDatabase(app); // 'app' is your Firebase app instance
+
+        const firestore = getFirestore(app); // 'app' is your Firebase app instance
+
+
+        document.getElementById("registrationForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Collect form data
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const country = document.getElementById("country").value;
+
+            // Check if form fields are not empty
+            if (username.trim() === "" || email.trim() === "" || country.trim() === "") {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            // Create a reference to the "registrations" collection
+            const registrationsCollection = collection(firestore, "registrations");
+
+            // Create a new registration document
+            const registrationData = {
+                username: username,
+                email: email,
+                country: country
+            };
+
+            // Add the registration data to Firestore
+            addDoc(registrationsCollection, registrationData)
+                .then(() => {
+                    console.log('Registration successful');
+                    // Redirect to the game.html page
+                    window.location.href = 'game.html';
+                })
+                .catch((error) => {
+                    console.error('Registration failed:', error);
+                    // You can add code here to handle the error
+                });
+        });
+
+    </script>
+</body>
+
+</html>
